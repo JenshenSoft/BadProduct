@@ -20,6 +20,7 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        application = this;
         Firebase.setAndroidContext(this);
     }
 
@@ -39,7 +40,7 @@ public class Application extends android.app.Application {
 
     public AdditiveComponent getAdditiveComponent() {
         if (additiveComponent == null) {
-            getAppComponent().plus(new AdditiveModule());
+            additiveComponent = getAppComponent().plus(new AdditiveModule());
         }
         return additiveComponent;
     }
