@@ -7,6 +7,7 @@ import org.androidannotations.annotations.EActivity;
 
 import ua.regin.badproduct.R;
 import ua.regin.badproduct.ui.BaseActivity;
+import ua.regin.badproduct.ui.addictive.AddictiveFragment_;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
@@ -15,7 +16,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            Fragment fragment = MainFragment_.builder().build();
+            Fragment fragment = AddictiveFragment_.builder().build();
             switchFragment(fragment);
         }
     }
