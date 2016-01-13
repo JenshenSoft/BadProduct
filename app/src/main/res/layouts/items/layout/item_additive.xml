@@ -24,8 +24,8 @@
             tools:text="E100" />
 
         <ua.regin.badproduct.ui.addictive.view.DangerView
-            android:layout_width="wrap_content"
             android:id="@+id/dangerView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -34,5 +34,22 @@
             android:layout_height="wrap_content"
             tools:text="Бета-Циклодекстрин" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ukraine_texture" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/usa" />
     </LinearLayout>
 </ua.regin.badproduct.ui.addictive.view.SquareLayout>

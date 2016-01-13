@@ -20,10 +20,8 @@ class DangerView : LinearLayout {
     }
 
     fun setDangerCount(count: Int) {
-        if (count > 0) {
-            for (index in 0..count) {
-                viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_red_dark));
-            }
+        for (index in 0..count - 1) {
+            viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_red_dark));
         }
     }
 

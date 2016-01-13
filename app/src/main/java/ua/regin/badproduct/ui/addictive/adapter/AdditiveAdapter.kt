@@ -40,6 +40,7 @@ class AdditiveAdapter(val context: Context) : RecyclerView.Adapter<AdditiveAdapt
 
                 when (naturality) {
                     "natural" -> itemView.nameView.setTextColor(context.resources.getColor(android.R.color.holo_green_dark));
+                    "synthetic" -> itemView.nameView.setTextColor(context.resources.getColor(android.R.color.holo_red_dark));
                 }
 
             }
