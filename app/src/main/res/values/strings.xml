@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">BadProduct</string>
+    <string name="app_name">Пищевые добавки</string>
+
+    <string name="additive.item.title">%1$s - %2$s</string>
+    <string name="drawer.menu.additive">Пищевые добавки</string>
+
+    <string name="menu.item.search.title">Поиск</string>
 </resources>

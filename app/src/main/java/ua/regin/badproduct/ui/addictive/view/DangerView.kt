@@ -20,8 +20,12 @@ class DangerView : LinearLayout {
     }
 
     fun setDangerCount(count: Int) {
-        for (index in 0..count - 1) {
-            viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_red_dark));
+        for (index in 0..DANGER_COUNT) {
+            if (index < count) {
+                viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_red_dark));
+            } else {
+                viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_green_dark));
+            }
         }
     }
 
@@ -31,7 +35,6 @@ class DangerView : LinearLayout {
         for (index in 0..DANGER_COUNT) {
             var view = View(context);
             view.layoutParams = params;
-            view.setBackgroundColor(context.getColor(android.R.color.holo_green_dark))
             addView(view);
             viewList.add(view);
         }

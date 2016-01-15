@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.item_additive.view.*
+import android.widget.TextView
 import ua.regin.badproduct.R
 import ua.regin.badproduct.entity.Additive
+import ua.regin.badproduct.ui.addictive.view.DangerView
+import ua.regin.badproduct.util.knife.bindView
 
 class AdditiveAdapter(val context: Context) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
 
@@ -30,20 +32,28 @@ class AdditiveAdapter(val context: Context) : RecyclerView.Adapter<AdditiveAdapt
         holder?.bindAdditive(additiveList!![position]);
     }
 
-    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val nameView: TextView by bindView(R.id.nameView);
+        val similarView: TextView by bindView(R.id.similarView);
+        val dangerView: DangerView by bindView(R.id.dangerView);
 
         fun bindAdditive(additive: Additive) {
             with(additive) {
-                itemView.nameView.text = name;
-                itemView.similarView.text = similar;
-                itemView.dangerView.setDangerCount(danger!!);
+                nameView.text = context.getString(R.string.additive_item_title, name, similar);
+                similarView.text = synonym;
+                dangerView.setDangerCount(danger!!);
 
                 when (naturality) {
-                    "natural" -> itemView.nameView.setTextColor(context.resources.getColor(android.R.color.holo_green_dark));
-                    "synthetic" -> itemView.nameView.setTextColor(context.resources.getColor(android.R.color.holo_red_dark));
+                    Additive.Naturality.Natural -> nameView.setTextColor(context.resources.getColor(android.R.color.holo_green_dark));
+                    Additive.Naturality.Synthetic -> nameView.setTextColor(context.resources.getColor(android.R.color.holo_red_dark));
+                    Additive.Naturality.Unknown -> nameView.setTextColor(context.resources.getColor(android.R.color.holo_orange_dark));
                 }
-
             }
         }
+    }
+
+    public interface OnClick {
+        fun onClick();
     }
 }

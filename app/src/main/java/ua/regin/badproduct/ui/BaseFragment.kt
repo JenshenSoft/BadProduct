@@ -1,12 +1,15 @@
 package ua.regin.badproduct.ui;
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.trello.rxlifecycle.components.support.RxFragment
 
 abstract class BaseFragment : RxFragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(getResId(), container, false);
@@ -18,8 +21,17 @@ abstract class BaseFragment : RxFragment() {
         afterViews();
     }
 
-    abstract fun injectComponent();
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(getOptionsId(), menu);
+    }
+
     abstract fun getResId(): Int;
-    abstract fun afterViews();
+    abstract fun getOptionsId(): Int;
+
+    open protected fun injectComponent() {
+    }
+
+    open protected fun afterViews() {
+    }
 }
 

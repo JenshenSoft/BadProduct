@@ -12,5 +12,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     abstract fun getResId(): Int;
-    abstract fun afterViews();
+
+    open protected fun afterViews() {
+    }
 }
