@@ -3,34 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="1dp"
+    android:layout_margin="5dp"
     tools:context=".ui.main.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/nameView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="E100" />
 
-        <ua.regin.badproduct.ui.addictive.view.DangerView
-            android:id="@+id/dangerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
-            android:id="@+id/similarView"
+            android:id="@+id/synonymView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:ellipsize="end"
+            android:lines="1"
             tools:text="Бета-Циклодекстрин" />
+
+        <ua.regin.badproduct.ui.addictive.view.DangerView
+            android:id="@+id/dangerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
 
     </LinearLayout>
 

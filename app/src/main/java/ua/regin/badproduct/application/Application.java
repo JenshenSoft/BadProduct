@@ -22,7 +22,7 @@ public class Application extends android.app.Application {
         super.onCreate();
         application = this;
         Firebase.setAndroidContext(this);
-        //TODO Firebase.getDefaultConfig().setPersistenceEnabled(true);
+        Firebase.getDefaultConfig().setPersistenceEnabled(true);
     }
 
     public static Application getApplication() {

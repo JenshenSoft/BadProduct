@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import ua.regin.badproduct.R
 import java.util.*
 
 class DangerView : LinearLayout {
@@ -22,16 +23,16 @@ class DangerView : LinearLayout {
     fun setDangerCount(count: Int) {
         for (index in 0..DANGER_COUNT) {
             if (index < count) {
-                viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_red_dark));
+                viewList[index].setBackgroundColor(context.getColor(R.color.colorPrimaryDarkRed));
             } else {
-                viewList[index].setBackgroundColor(context.getColor(android.R.color.holo_green_dark));
+                viewList[index].setBackgroundColor(context.getColor(R.color.colorPrimaryGreen));
             }
         }
     }
 
     fun init() {
-        var params = LinearLayout.LayoutParams(50, 50, 1f)
-        params.setMargins(2, 2, 2, 2);
+        var params = LinearLayout.LayoutParams(30, 15, 1f)
+        params.setMargins(1, 1, 1, 1);
         for (index in 0..DANGER_COUNT) {
             var view = View(context);
             view.layoutParams = params;

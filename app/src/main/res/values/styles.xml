@@ -6,7 +6,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>

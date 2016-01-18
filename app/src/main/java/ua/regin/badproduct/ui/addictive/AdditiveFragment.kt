@@ -1,8 +1,7 @@
 package ua.regin.badproduct.ui.addictive;
 
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
-import android.widget.TextView
 import com.firebase.client.DataSnapshot
 import com.firebase.client.FirebaseError
 import com.firebase.client.ValueEventListener
@@ -12,17 +11,15 @@ import ua.regin.badproduct.entity.Additive
 import ua.regin.badproduct.manager.IAdditiveManager
 import ua.regin.badproduct.ui.BaseFragment
 import ua.regin.badproduct.ui.addictive.adapter.AdditiveAdapter
-import ua.regin.badproduct.util.extend.setToolbar
 import ua.regin.badproduct.util.knife.bindView
 import java.util.*
 import javax.inject.Inject
 
-class AddictiveFragment : BaseFragment(), ValueEventListener {
+class AdditiveFragment : BaseFragment(), ValueEventListener {
     override fun getResId() = R.layout.fragment_additive;
     override fun getOptionsId() = R.menu.menu_search;
 
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
-    val toolbar: Toolbar by bindView(R.id.toolbar)
 
     @Inject
     lateinit var additiveManager: IAdditiveManager;
@@ -32,10 +29,14 @@ class AddictiveFragment : BaseFragment(), ValueEventListener {
     override fun injectComponent() = Application.getApplication().additiveComponent.inject(this);
 
     override fun afterViews() {
-        setToolbar(toolbar, R.string.app_name);
-        adapter = AdditiveAdapter(context);
+        adapter = AdditiveAdapter(context, {});
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);
+    }
+
+    override fun onDestroy() {
+        super.onDestroy();
+        additiveManager.removeAdditiveListener(this);
     }
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
