@@ -1,7 +1,9 @@
 package ua.regin.badproduct.ui.addictive;
 
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
+import android.view.Menu
+import android.view.MenuInflater
 import com.firebase.client.DataSnapshot
 import com.firebase.client.FirebaseError
 import com.firebase.client.ValueEventListener
@@ -32,6 +34,22 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
         adapter = AdditiveAdapter(context, {});
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        var myActionMenuItem = menu?.findItem(R.id.action_search);
+        var searchView = myActionMenuItem?.actionView as SearchView;
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false;
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                adapter.search(query);
+                return false;
+            }
+        });
     }
 
     override fun onDestroy() {

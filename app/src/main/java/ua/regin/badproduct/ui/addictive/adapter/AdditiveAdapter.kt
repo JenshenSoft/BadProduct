@@ -17,19 +17,27 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
         set(value) {
             field = value;
             notifyDataSetChanged();
+            filteredList = additiveList;
         }
 
+    private var filteredList: List<Additive>? = null;
+
+    fun search(query: String) {
+        filteredList = additiveList!!.filter { it.synonym.equals(query) };
+        notifyDataSetChanged();
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AdditiveAdapter.ViewHolder? {
-        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_additive, parent, false)
-        return ViewHolder(view)
+        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_additive, parent, false);
+        return ViewHolder(view);
     }
 
     override fun getItemCount(): Int {
-        return additiveList?.size ?: 0;
+        return filteredList?.size ?: 0;
     }
 
     override fun onBindViewHolder(holder: AdditiveAdapter.ViewHolder?, position: Int) {
-        holder?.bindAdditive(additiveList!![position], onClick);
+        holder?.bindAdditive(filteredList!![position], onClick);
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
