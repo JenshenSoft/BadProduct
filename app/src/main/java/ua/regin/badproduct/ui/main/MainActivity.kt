@@ -55,9 +55,18 @@ class MainActivity : BaseActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position;
                 when (tab.position) {
-                    0 -> setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
-                    1 -> setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
-                    2 -> setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
+                    0 -> {
+                        setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
+                        title = "Все добавки"
+                    }
+                    1 -> {
+                        setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
+                        title = "Безопасные"
+                    }
+                    2 -> {
+                        setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
+                        title = "Опасные"
+                    };
                 }
                 tab.selected(true);
             }

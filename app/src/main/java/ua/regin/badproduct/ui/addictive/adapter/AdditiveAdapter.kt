@@ -46,12 +46,7 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
             itemView.setOnClickListener { function(additive) }
             with(additive) {
                 nameView.text = name;
-
-                when (naturality) {
-                    Additive.Naturality.Natural -> container.setBackgroundResource(R.color.colorPrimaryGreen);
-                    Additive.Naturality.Synthetic -> container.setBackgroundResource(R.color.colorPrimaryRed);
-                    Additive.Naturality.Unknown -> container.setBackgroundResource(R.color.colorPrimary);
-                }
+                container.setBackgroundResource(if (danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed);
             }
         }
     }
