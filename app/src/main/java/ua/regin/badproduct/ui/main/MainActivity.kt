@@ -37,15 +37,15 @@ class MainActivity : BaseActivity() {
     override fun afterViews() {
 
         val fragmentList: MutableList<Fragment> = ArrayList();
-        fragmentList.add(AdditiveFragment());
-        fragmentList.add(AdditiveFragment());
-        fragmentList.add(AdditiveFragment());
+        fragmentList.add(AdditiveFragment.newInstance(-1, 5));
+        fragmentList.add(AdditiveFragment.newInstance(0, 2));
+        fragmentList.add(AdditiveFragment.newInstance(2, 5));
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, fragmentList);
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_view_list_white_48px));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_check_circle_white_48px));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px));
 
         viewPager.adapter = pagerAdapter;
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -56,8 +56,8 @@ class MainActivity : BaseActivity() {
 
                 when (tab.position) {
                     0 -> setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary)
-                    1 -> setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed)
-                    2 -> setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen)
+                    1 -> setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen)
+                    2 -> setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed)
                 }
             }
 

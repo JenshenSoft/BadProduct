@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import com.firebase.client.DataSnapshot
 import com.firebase.client.FirebaseError
 import com.firebase.client.ValueEventListener
+import com.github.vmironov.jetpack.arguments.bindArgument
 import ua.regin.badproduct.R
 import ua.regin.badproduct.application.Application
 import ua.regin.badproduct.entity.Additive
@@ -22,6 +23,9 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
     override fun getOptionsId() = R.menu.menu_search;
 
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
+
+    var dangerFrom by bindArgument<Int>()
+    var dangerTo by bindArgument<Int>()
 
     @Inject
     lateinit var additiveManager: IAdditiveManager;
@@ -63,10 +67,17 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
             var additive = postSnapshot.getValue(Additive::class.java);
             additiveList.add(additive);
         }
-        adapter.additiveList = additiveList;
+        adapter.additiveList = additiveList.filter { it.danger > dangerFrom && it.danger < dangerTo };
     }
 
     override public fun onCancelled(firebaseError: FirebaseError) {
 
+    }
+
+    public companion object { //TODO refactoring fragment creation
+        public fun newInstance(dangerFrom: Int, dangerTo: Int): AdditiveFragment = AdditiveFragment().apply {
+            this.dangerFrom = dangerFrom;
+            this.dangerTo = dangerTo;
+        }
     }
 }

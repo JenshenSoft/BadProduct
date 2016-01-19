@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ua.regin.badproduct.R
 import ua.regin.badproduct.entity.Additive
-import ua.regin.badproduct.ui.addictive.view.DangerView
 import ua.regin.badproduct.util.knife.bindView
 
 class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
@@ -23,7 +22,7 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
     private var filteredList: List<Additive>? = null;
 
     fun search(query: String) {
-        filteredList = additiveList!!.filter { it.synonym.equals(query) };
+        filteredList = additiveList!!.filter { it.synonym.contains(query, true) || it.name.contains(query, true) };
         notifyDataSetChanged();
     }
 
@@ -43,25 +42,17 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val nameView: TextView by bindView(R.id.nameView);
-        val synonymView: TextView by bindView(R.id.synonymView);
-        val dangerView: DangerView by bindView(R.id.dangerView);
+        val container: View by bindView(R.id.container);
 
         fun bindAdditive(additive: Additive, function: (additive: Additive) -> Unit) {
             itemView.setOnClickListener { function(additive) }
             with(additive) {
-                nameView.text = context.getString(R.string.additive_item_title, name, similar);
-                if (!synonym.isNullOrBlank()) {
-                    synonymView.text = synonym;
-                    synonymView.visibility = View.VISIBLE;
-                } else {
-                    synonymView.visibility = View.GONE;
-                }
+                nameView.text = name;
 
-                dangerView.setDangerCount(danger!!);
                 when (naturality) {
-                    Additive.Naturality.Natural -> nameView.setTextColor(context.resources.getColor(R.color.colorPrimaryDarkGreen));
-                    Additive.Naturality.Synthetic -> nameView.setTextColor(context.resources.getColor(R.color.colorPrimaryDarkRed));
-                    Additive.Naturality.Unknown -> nameView.setTextColor(context.resources.getColor(R.color.colorPrimaryDark));
+                    Additive.Naturality.Natural -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimaryGreen));
+                    Additive.Naturality.Synthetic -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimaryRed));
+                    Additive.Naturality.Unknown -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimary));
                 }
             }
         }
