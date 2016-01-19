@@ -2,6 +2,7 @@ package ua.regin.badproduct.ui.addictive;
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuInflater
 import com.firebase.client.DataSnapshot
@@ -14,6 +15,7 @@ import ua.regin.badproduct.entity.Additive
 import ua.regin.badproduct.manager.IAdditiveManager
 import ua.regin.badproduct.ui.BaseFragment
 import ua.regin.badproduct.ui.addictive.adapter.AdditiveAdapter
+import ua.regin.badproduct.ui.addictive.details.AdditiveDetailsActivity
 import ua.regin.badproduct.util.knife.bindView
 import java.util.*
 import javax.inject.Inject
@@ -35,7 +37,9 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
     override fun injectComponent() = Application.getApplication().additiveComponent.inject(this);
 
     override fun afterViews() {
-        adapter = AdditiveAdapter(context, {});
+        adapter = AdditiveAdapter(context, {
+            startActivity(AdditiveDetailsActivity.newInstance(context, it))
+        });
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);
     }
@@ -44,6 +48,7 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
         super.onCreateOptionsMenu(menu, inflater)
         var myActionMenuItem = menu?.findItem(R.id.action_search);
         var searchView = myActionMenuItem?.actionView as SearchView;
+        searchView.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_CLASS_TEXT;
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false;
@@ -74,7 +79,7 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
 
     }
 
-    public companion object { //TODO refactoring fragment creation
+    public companion object {
         public fun newInstance(dangerFrom: Int, dangerTo: Int): AdditiveFragment = AdditiveFragment().apply {
             this.dangerFrom = dangerFrom;
             this.dangerTo = dangerTo;

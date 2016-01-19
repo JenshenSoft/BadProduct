@@ -4,8 +4,6 @@
     <string name="menu.item.settings.title">Настройки</string>
     <string name="menu.item.search.title">Поиск</string>
 
-    <string name="additive.item.title">%1$s - %2$s</string>
-
     <string name="main.title.all">Все добавки</string>
     <string name="main.title.notdanger">Безопасные</string>
     <string name="main.title.danger">Опасные</string>
