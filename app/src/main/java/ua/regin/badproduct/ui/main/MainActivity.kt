@@ -57,15 +57,15 @@ class MainActivity : BaseActivity() {
                 when (tab.position) {
                     0 -> {
                         setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
-                        title = "Все добавки"
+                        setTitle(R.string.main_title_all);
                     }
                     1 -> {
                         setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
-                        title = "Безопасные"
+                        setTitle(R.string.main_title_notdanger);
                     }
                     2 -> {
                         setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
-                        title = "Опасные"
+                        setTitle(R.string.main_title_danger);
                     };
                 }
                 tab.selected(true);
