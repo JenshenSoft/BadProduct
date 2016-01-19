@@ -15,6 +15,7 @@ import ua.regin.badproduct.ui.main.adapter.PagerAdapter
 import ua.regin.badproduct.util.AnimationUtils
 import ua.regin.badproduct.util.getBackgroundColor
 import ua.regin.badproduct.util.knife.bindView
+import ua.regin.badproduct.util.tab.selected
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -43,25 +44,26 @@ class MainActivity : BaseActivity() {
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, fragmentList);
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_view_list_white_48px));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_check_circle_white_48px));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_view_list_white_48px).selected(true));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_check_circle_white_48px).selected(false));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px).selected(false));
 
         viewPager.adapter = pagerAdapter;
-        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewPager.offscreenPageLimit = 3;
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position;
-
                 when (tab.position) {
-                    0 -> setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary)
-                    1 -> setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen)
-                    2 -> setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed)
+                    0 -> setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
+                    1 -> setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
+                    2 -> setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
                 }
+                tab.selected(true);
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
+                tab.selected(false)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {

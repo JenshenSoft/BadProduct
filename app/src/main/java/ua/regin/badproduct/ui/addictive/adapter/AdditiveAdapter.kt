@@ -31,9 +31,7 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
         return ViewHolder(view);
     }
 
-    override fun getItemCount(): Int {
-        return filteredList?.size ?: 0;
-    }
+    override fun getItemCount() = filteredList?.size ?: 0;
 
     override fun onBindViewHolder(holder: AdditiveAdapter.ViewHolder?, position: Int) {
         holder?.bindAdditive(filteredList!![position], onClick);
@@ -50,9 +48,9 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
                 nameView.text = name;
 
                 when (naturality) {
-                    Additive.Naturality.Natural -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimaryGreen));
-                    Additive.Naturality.Synthetic -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimaryRed));
-                    Additive.Naturality.Unknown -> container.setBackgroundColor(context.resources.getColor(R.color.colorPrimary));
+                    Additive.Naturality.Natural -> container.setBackgroundResource(R.color.colorPrimaryGreen);
+                    Additive.Naturality.Synthetic -> container.setBackgroundResource(R.color.colorPrimaryRed);
+                    Additive.Naturality.Unknown -> container.setBackgroundResource(R.color.colorPrimary);
                 }
             }
         }

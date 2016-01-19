@@ -11,6 +11,8 @@ abstract class BaseActivity : RxAppCompatActivity() {
         afterViews();
     }
 
+    fun getContext() = this;
+
     abstract fun getResId(): Int;
 
     open protected fun afterViews() {

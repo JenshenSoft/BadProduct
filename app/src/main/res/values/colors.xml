@@ -14,4 +14,6 @@
     <color name="colorPrimaryDarkGreen">#004D40</color>
     <color name="colorPrimaryGreen">#00695C</color>
 
+    <color name="normal_state">#212121</color>
+
 </resources>
