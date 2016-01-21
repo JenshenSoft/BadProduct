@@ -22,7 +22,7 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
     private var filteredList: List<Additive>? = null;
 
     fun search(query: String) {
-        filteredList = additiveList!!.filter { it.synonym.contains(query, true) || it.name.contains(query, true) };
+        filteredList = additiveList?.filter { it.synonym.contains(query, true) || it.name.contains(query, true) };
         notifyDataSetChanged();
     }
 

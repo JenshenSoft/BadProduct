@@ -12,13 +12,9 @@ class AdditiveDetailsFragment : BaseFragment() {
     override fun getResId() = R.layout.fragment_details_additive;
     override fun getOptionsId() = R.menu.menu_search;
 
-    private val descriptionView: TextView by bindView(R.id.descriptionView);
-
     var additive by bindArgument<Additive>()
 
     override fun afterViews() {
-        descriptionView.text = additive.description;
-        descriptionView.movementMethod = ScrollingMovementMethod.getInstance();
     }
 
     public companion object {

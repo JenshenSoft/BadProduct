@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.ColorRes
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -82,9 +83,9 @@ class MainActivity : BaseActivity() {
 
     private fun setHeaderColor(@ColorRes statusBarColorRes: Int, @ColorRes toolbarBarColorRes: Int) {
         if (Build.VERSION.SDK_INT >= 21) {
-            AnimationUtils.animateColorChange(window, "statusBarColor", window.statusBarColor, resources.getColor(statusBarColorRes));
+            AnimationUtils.animateColorChange(window, "statusBarColor", window.statusBarColor, ContextCompat.getColor(getContext(), statusBarColorRes));
         }
-        AnimationUtils.animateColorChange(toolbar, "backgroundColor", toolbar.getBackgroundColor(), resources.getColor(toolbarBarColorRes));
-        AnimationUtils.animateColorChange(tabLayout, "backgroundColor", toolbar.getBackgroundColor(), resources.getColor(toolbarBarColorRes));
+        AnimationUtils.animateColorChange(toolbar, "backgroundColor", toolbar.getBackgroundColor(), ContextCompat.getColor(getContext(), toolbarBarColorRes));
+        AnimationUtils.animateColorChange(tabLayout, "backgroundColor", toolbar.getBackgroundColor(), ContextCompat.getColor(getContext(), toolbarBarColorRes));
     }
 }
