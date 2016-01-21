@@ -37,7 +37,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun afterViews() {
-
         val fragmentList: MutableList<Fragment> = ArrayList();
         fragmentList.add(AdditiveFragment.newInstance(-1, 5));
         fragmentList.add(AdditiveFragment.newInstance(0, 2));

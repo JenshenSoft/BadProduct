@@ -6,9 +6,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Light">
+    <style name="AppTheme.AdditiveDetailsActivity">
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+    </style>
+
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="popupTheme">@style/Theme.AppCompat.NoActionBar</item>
+    </style>
+
+    <style name="TextViewStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
 </resources>

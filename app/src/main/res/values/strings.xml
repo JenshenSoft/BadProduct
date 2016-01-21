@@ -8,4 +8,5 @@
     <string name="main.title.notdanger">Безопасные</string>
     <string name="main.title.danger">Опасные</string>
 
+    <string name="details.danger">Опасность: %s/5</string>
 </resources>

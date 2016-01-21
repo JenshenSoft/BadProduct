@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.addictive.details.AdditiveDetailsActivity" />
+        <activity
+            android:name=".ui.addictive.details.AdditiveDetailsActivity"
+            android:theme="@style/AppTheme.AdditiveDetailsActivity" />
     </application>
 
 </manifest>

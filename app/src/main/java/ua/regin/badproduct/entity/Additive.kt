@@ -7,7 +7,7 @@ data class Additive(val id: Long = 0,
                     val  name: String = "",
                     val description: String = "",
                     val danger: Int = 0,
-                    val image: String = "",
+                    val image: String? = null,
                     val naturality: Naturality = Additive.Naturality.Natural,
                     val synonym: String = "") : Serializable {
 
