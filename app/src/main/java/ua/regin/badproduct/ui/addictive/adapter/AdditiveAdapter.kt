@@ -1,6 +1,7 @@
 package ua.regin.badproduct.ui.addictive.adapter
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import ua.regin.badproduct.R
 import ua.regin.badproduct.entity.Additive
+import ua.regin.badproduct.ui.addictive.view.SquareLayout
 import ua.regin.badproduct.util.knife.bindView
 
 class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
@@ -40,13 +42,13 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val nameView: TextView by bindView(R.id.nameView);
-        val container: View by bindView(R.id.container);
+        val container: SquareLayout by bindView(R.id.container);
 
         fun bindAdditive(additive: Additive, function: (additive: Additive) -> Unit) {
             itemView.setOnClickListener { function(additive) }
             with(additive) {
                 nameView.text = name;
-                container.setBackgroundResource(if (danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed);
+                container.setCardBackgroundColor(ContextCompat.getColor(context, if (danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed));
             }
         }
     }

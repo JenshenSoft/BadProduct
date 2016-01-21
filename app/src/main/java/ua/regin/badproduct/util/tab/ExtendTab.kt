@@ -1,9 +1,12 @@
 package ua.regin.badproduct.util.tab
 
-import android.graphics.Color
+import android.content.Context
 import android.support.design.widget.TabLayout
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 
-fun TabLayout.Tab.selected(isSelected: Boolean): TabLayout.Tab {
-    icon.setTint(Color.parseColor(if (isSelected) "#FFFFFF" else "#2C3940"));
+fun TabLayout.Tab.selected(context: Context, isSelected: Boolean): TabLayout.Tab {
+    var wrapDrawable = DrawableCompat.wrap(icon);
+    DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, if (isSelected) android.R.color.white else android.R.color.black));
     return this;
 }

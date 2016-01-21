@@ -44,9 +44,9 @@ class MainActivity : BaseActivity() {
 
         val pagerAdapter = PagerAdapter(supportFragmentManager, fragmentList);
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_view_list_white_48px).selected(true));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_check_circle_white_48px).selected(false));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px).selected(false));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_view_list_white_48px).selected(getContext(), true));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_check_circle_white_48px).selected(getContext(), false));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_error_outline_white_48px).selected(getContext(), false));
 
         viewPager.adapter = pagerAdapter;
         viewPager.offscreenPageLimit = 3;
@@ -68,11 +68,11 @@ class MainActivity : BaseActivity() {
                         setTitle(R.string.main_title_danger);
                     };
                 }
-                tab.selected(true);
+                tab.selected(getContext(), true);
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.selected(false)
+                tab.selected(getContext(), false)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
