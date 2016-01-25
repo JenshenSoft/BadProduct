@@ -1,12 +1,15 @@
 package ua.regin.badproduct.ui.addictive.details
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.content.ContextCompat
+import android.support.v7.graphics.Palette
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.vmironov.jetpack.arguments.bindArgument
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ua.regin.badproduct.R
 import ua.regin.badproduct.model.Additive
@@ -32,7 +35,16 @@ class AdditiveDetailsFragment : BaseFragment() {
         setToolbar(toolbar);
         toolbar.setNavigationOnClickListener { activity.finish(); }
         toolbar.title = additive.name;
-        Picasso.with(context).load(additive.image).fit().centerCrop().into(imageView);
+        Picasso.with(context).load(additive.image).fit().centerCrop().into(imageView, object : Callback {
+            override fun onSuccess() {
+                val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+                val palette = Palette.Builder(bitmap).generate();
+                collapsingToolbarLayout.setExpandedTitleColor(palette.lightMutedSwatch?.bodyTextColor ?: 0);
+            }
+
+            override fun onError() {
+            }
+        });
         changeHeaderColor();
     }
 

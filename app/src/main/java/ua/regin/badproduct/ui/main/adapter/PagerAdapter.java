@@ -20,7 +20,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment;
         switch (position) {
             case 0:
-                fragment = AdditiveListFragment.Companion.newInstance(new Danger(-1, 5));
+                fragment = AdditiveListFragment.Companion.newInstance(new Danger(0, 5));
                 break;
             case 1:
                 fragment = AdditiveListFragment.Companion.newInstance(new Danger(0, 2));

@@ -72,7 +72,7 @@ class AdditiveListFragment : BaseFragment(), ValueEventListener {
             var additive = postSnapshot.getValue(Additive::class.java);
             additiveList.add(additive);
         }
-        adapter.additiveList = additiveList.filter { it.danger > danger.from && it.danger < danger.to };
+        adapter.additiveList = additiveList.filter { it.danger >= danger.from && it.danger <= danger.to };
     }
 
     override public fun onCancelled(firebaseError: FirebaseError) {
