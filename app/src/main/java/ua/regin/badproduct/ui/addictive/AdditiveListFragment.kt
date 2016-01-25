@@ -11,8 +11,9 @@ import com.firebase.client.ValueEventListener
 import com.github.vmironov.jetpack.arguments.bindArgument
 import ua.regin.badproduct.R
 import ua.regin.badproduct.application.Application
-import ua.regin.badproduct.entity.Additive
 import ua.regin.badproduct.manager.IAdditiveManager
+import ua.regin.badproduct.model.Additive
+import ua.regin.badproduct.model.Danger
 import ua.regin.badproduct.ui.BaseFragment
 import ua.regin.badproduct.ui.addictive.adapter.AdditiveAdapter
 import ua.regin.badproduct.ui.addictive.details.AdditiveDetailsActivity
@@ -20,14 +21,13 @@ import ua.regin.badproduct.util.knife.bindView
 import java.util.*
 import javax.inject.Inject
 
-class AdditiveFragment : BaseFragment(), ValueEventListener {
+class AdditiveListFragment : BaseFragment(), ValueEventListener {
     override fun getResId() = R.layout.fragment_additive;
     override fun getOptionsId() = R.menu.menu_search;
 
-    val recyclerView: RecyclerView by bindView(R.id.recyclerView)
+    private val recyclerView: RecyclerView by bindView(R.id.recyclerView)
 
-    var dangerFrom by bindArgument<Int>()
-    var dangerTo by bindArgument<Int>()
+    private var danger by bindArgument<Danger>()
 
     @Inject
     lateinit var additiveManager: IAdditiveManager;
@@ -38,7 +38,7 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
 
     override fun afterViews() {
         adapter = AdditiveAdapter(context, {
-            startActivity(AdditiveDetailsActivity.newInstance(context, it))
+            startActivity(AdditiveDetailsActivity.newInstance(context, adapter.additiveList as ArrayList<Additive>, it))
         });
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);
@@ -72,7 +72,7 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
             var additive = postSnapshot.getValue(Additive::class.java);
             additiveList.add(additive);
         }
-        adapter.additiveList = additiveList.filter { it.danger > dangerFrom && it.danger < dangerTo };
+        adapter.additiveList = additiveList.filter { it.danger > danger.from && it.danger < danger.to };
     }
 
     override public fun onCancelled(firebaseError: FirebaseError) {
@@ -80,9 +80,8 @@ class AdditiveFragment : BaseFragment(), ValueEventListener {
     }
 
     public companion object {
-        public fun newInstance(dangerFrom: Int, dangerTo: Int): AdditiveFragment = AdditiveFragment().apply {
-            this.dangerFrom = dangerFrom;
-            this.dangerTo = dangerTo;
+        public fun newInstance(danger: Danger): AdditiveListFragment = AdditiveListFragment().apply {
+            this.danger = danger;
         }
     }
 }

@@ -7,5 +7,5 @@ interface IAdditiveManager {
     fun addAdditiveListener(valueEventListener: ValueEventListener);
 
     fun removeAdditiveListener(valueEventListener: ValueEventListener);
-
+    
 }

@@ -2,59 +2,42 @@ package ua.regin.badproduct.ui.addictive.details
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.Toolbar
-import android.view.WindowManager
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
+import android.support.v4.view.ViewPager
+import com.xgc1986.parallaxPagerTransformer.ParallaxPagerTransformer
 import ua.regin.badproduct.R
-import ua.regin.badproduct.entity.Additive
+import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.BaseActivity
+import ua.regin.badproduct.ui.addictive.details.adapter.AdditivePagerAdapter
 import ua.regin.badproduct.util.knife.bindView
+import java.util.*
 
 class AdditiveDetailsActivity : BaseActivity() {
+
     override fun getResId() = R.layout.activity_additive_details;
 
-    private val toolbar: Toolbar by bindView(R.id.toolbar);
-    private val collapsingToolbarLayout: CollapsingToolbarLayout by bindView(R.id.collapsingToolbarLayout);
-    private val imageView: ImageView by bindView(R.id.imageView);
+    private val viewPager: ViewPager by bindView(R.id.viewPager)
 
-    lateinit var additive: Additive;
+    lateinit private var additiveList: List<Additive>;
+    private var position = 0;
 
     override fun onReceiveIntent() {
-        additive = intent.getSerializableExtra(ADDITIVE_EXTRA) as Additive;
+        additiveList = intent.getSerializableExtra(EXTRA_ADDITIVE_LIST) as ArrayList<Additive>;
+        position = intent.getIntExtra(EXTRA_POSITION, position);
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().replace(R.id.container, AdditiveDetailsFragment.newInstance(additive)).commit();
-        }
-        setSupportActionBar(toolbar);
-        supportActionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24px);
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener { finish(); }
-        title = additive.name;
-        Picasso.with(getContext()).load(additive.image).fit().centerCrop().into(imageView);
-        changeHeaderColor();
-    }
-
-    private fun changeHeaderColor() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            window.statusBarColor = ContextCompat.getColor(getContext(), if (additive.danger < 2) R.color.colorPrimaryDarkGreen else R.color.colorPrimaryDarkRed);
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-        collapsingToolbarLayout.setContentScrimResource(if (additive.danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed)
+    override fun afterViews() {
+        super.afterViews();
+        viewPager.adapter = AdditivePagerAdapter(supportFragmentManager, additiveList);
+        viewPager.setPageTransformer(false, ParallaxPagerTransformer(R.id.imageView));
+        viewPager.currentItem = position;
     }
 
     public companion object {
-        const val ADDITIVE_EXTRA = "additiveExtra";
-        public fun newInstance(context: Context, additive: Additive): Intent = Intent(context, AdditiveDetailsActivity::class.java).apply {
-            putExtra(ADDITIVE_EXTRA, additive);
+        const val EXTRA_ADDITIVE_LIST = "extraAdditiveList";
+        const val EXTRA_POSITION = "extraPosition";
+        public fun newInstance(context: Context, additiveList: ArrayList<Additive>, position: Int): Intent = Intent(context, AdditiveDetailsActivity::class.java).apply {
+            putExtra(EXTRA_ADDITIVE_LIST, additiveList);
+            putExtra(EXTRA_POSITION, position);
         }
     }
 }

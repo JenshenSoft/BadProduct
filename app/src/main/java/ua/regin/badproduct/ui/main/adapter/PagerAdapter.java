@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import ua.regin.badproduct.ui.addictive.AdditiveFragment;
+import ua.regin.badproduct.model.Danger;
+import ua.regin.badproduct.ui.addictive.AdditiveListFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
@@ -19,13 +20,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment;
         switch (position) {
             case 0:
-                fragment = AdditiveFragment.Companion.newInstance(-1, 5);
+                fragment = AdditiveListFragment.Companion.newInstance(new Danger(-1, 5));
                 break;
             case 1:
-                fragment = AdditiveFragment.Companion.newInstance(0, 2);
+                fragment = AdditiveListFragment.Companion.newInstance(new Danger(0, 2));
                 break;
             case 2:
-                fragment = AdditiveFragment.Companion.newInstance(2, 5);
+                fragment = AdditiveListFragment.Companion.newInstance(new Danger(2, 5));
                 break;
             default:
                 throw new RuntimeException("Unknown fragment");

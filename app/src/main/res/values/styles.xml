@@ -9,6 +9,8 @@
     <style name="AppTheme.AdditiveDetailsActivity">
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:colorBackground">@android:color/white</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Light">

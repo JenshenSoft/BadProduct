@@ -9,6 +9,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(getResId());
         onReceiveIntent();
+        injectComponent();
         afterViews();
     }
 
@@ -17,6 +18,9 @@ abstract class BaseActivity : RxAppCompatActivity() {
     abstract fun getResId(): Int;
 
     open protected fun onReceiveIntent() {
+    }
+
+    open protected fun injectComponent() {
     }
 
     open protected fun afterViews() {

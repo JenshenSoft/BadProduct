@@ -46,7 +46,15 @@ android {
             res.srcDirs = show('src/main/res/layouts');
         }
     }
+
+    productFlavors {
+        normal
+        dev {
+            minSdkVersion 21
+        }
+    }
 }
+
 
 kapt {
     generateStubs = true
@@ -93,6 +101,9 @@ dependencies {
 
     //Extra Binding
     compile "com.github.vmironov.jetpack:jetpack-bindings-arguments:0.14.0"
+
+    //Parallax Pager
+    compile 'com.xgc1986.android:parallaxpagertransformer:1.0.3'
 }
 
 def show(String... resPath) {

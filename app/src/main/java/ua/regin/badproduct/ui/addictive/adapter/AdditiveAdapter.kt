@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ua.regin.badproduct.R
-import ua.regin.badproduct.entity.Additive
+import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.addictive.view.SquareLayout
 import ua.regin.badproduct.util.knife.bindView
 
-class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
+class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
 
     var additiveList: List<Additive>? = null;
         set(value) {
@@ -36,7 +36,7 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
     override fun getItemCount() = filteredList?.size ?: 0;
 
     override fun onBindViewHolder(holder: AdditiveAdapter.ViewHolder?, position: Int) {
-        holder?.bindAdditive(filteredList!![position], onClick);
+        holder?.bindAdditive(filteredList!![position], { onClick(position) });
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,8 +44,8 @@ class AdditiveAdapter(val context: Context, val onClick: (additive: Additive) ->
         val nameView: TextView by bindView(R.id.nameView);
         val container: SquareLayout by bindView(R.id.container);
 
-        fun bindAdditive(additive: Additive, function: (additive: Additive) -> Unit) {
-            itemView.setOnClickListener { function(additive) }
+        fun bindAdditive(additive: Additive, function: () -> Unit) {
+            itemView.setOnClickListener { function() }
             with(additive) {
                 nameView.text = name;
                 container.setCardBackgroundColor(ContextCompat.getColor(context, if (danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed));
