@@ -16,7 +16,7 @@ class AdditiveDetailsFragment : BaseFragment() {
 
     var additive by bindArgument<Additive>()
 
-    override fun afterViews() {
+    fun afterViews() {
         dangerousView.text = context.getString(R.string.details_danger, additive.danger);
         naturalityView.text = additive.naturality.toString();
     }

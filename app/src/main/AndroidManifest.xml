@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.main.MainActivity_"
             android:label="@string/main.title.all"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.addictive.details.AdditiveDetailsActivity"
+            android:name=".ui.addictive.details.AdditiveDetailsActivity_"
             android:theme="@style/AppTheme.AdditiveDetailsActivity" />
     </application>
 

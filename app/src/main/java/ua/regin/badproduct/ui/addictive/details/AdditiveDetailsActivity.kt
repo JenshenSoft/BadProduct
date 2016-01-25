@@ -9,13 +9,14 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import org.androidannotations.annotations.EActivity
 import ua.regin.badproduct.R
 import ua.regin.badproduct.entity.Additive
 import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.util.knife.bindView
 
-class AdditiveDetailsActivity : BaseActivity() {
-    override fun getResId() = R.layout.activity_additive_details;
+@EActivity(R.layout.activity_additive_details)
+open class AdditiveDetailsActivity : BaseActivity() {
 
     private val toolbar: Toolbar by bindView(R.id.toolbar);
     private val collapsingToolbarLayout: CollapsingToolbarLayout by bindView(R.id.collapsingToolbarLayout);
@@ -23,7 +24,7 @@ class AdditiveDetailsActivity : BaseActivity() {
 
     lateinit var additive: Additive;
 
-    override fun onReceiveIntent() {
+    fun onReceiveIntent() {
         additive = intent.getSerializableExtra(ADDITIVE_EXTRA) as Additive;
     }
 

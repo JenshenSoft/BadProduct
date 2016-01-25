@@ -18,7 +18,6 @@ abstract class BaseFragment : RxFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState);
         injectComponent();
-        afterViews();
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -29,9 +28,6 @@ abstract class BaseFragment : RxFragment() {
     abstract fun getOptionsId(): Int;
 
     open protected fun injectComponent() {
-    }
-
-    open protected fun afterViews() {
     }
 }
 

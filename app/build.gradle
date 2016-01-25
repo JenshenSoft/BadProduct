@@ -50,6 +50,11 @@ android {
 
 kapt {
     generateStubs = true
+    arguments {
+        arg("androidManifestFile", variant.outputs[0].processResourcesTask.manifestFile)
+        arg("resourcePackageName", android.defaultConfig.applicationId)
+        arg("logLevel", "trace")
+    }
 }
 
 dependencies {
@@ -86,10 +91,10 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.0'
     //Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-4584"
-    //Dagger 2
-    compile 'com.google.dagger:dagger:2.0'
-    kapt 'com.google.dagger:dagger-compiler:2.0'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    //Android Annotations
+    kapt "org.androidannotations:androidannotations:3.3.2"
+    compile 'org.androidannotations:androidannotations-api:3.3.2'
 
     //Extra Binding
     compile "com.github.vmironov.jetpack:jetpack-bindings-arguments:0.14.0"

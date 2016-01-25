@@ -4,24 +4,38 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.List;
+import ua.regin.badproduct.ui.addictive.AdditiveFragment_;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private final List<Fragment> fragmentList;
+    private static final int PAGE_COUNT = 3;
 
-    public PagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
-        this.fragmentList = fragmentList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragmentList.get(position);
+        Fragment fragment;
+        switch (position) {
+            case 0:
+                fragment = AdditiveFragment_.builder().dangerFrom(0).dangerTo(5).build();
+                break;
+            case 1:
+                fragment = AdditiveFragment_.builder().dangerFrom(0).dangerTo(2).build();
+                break;
+            case 2:
+                fragment = AdditiveFragment_.builder().dangerFrom(2).dangerTo(5).build();
+                break;
+            default:
+                throw new RuntimeException("Unknown fragment position");
+        }
+
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return PAGE_COUNT;
     }
 }
