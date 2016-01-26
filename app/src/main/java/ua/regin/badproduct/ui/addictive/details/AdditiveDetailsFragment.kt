@@ -39,7 +39,7 @@ class AdditiveDetailsFragment : BaseFragment() {
             override fun onSuccess() {
                 val bitmap = (imageView.drawable as BitmapDrawable).bitmap
                 val palette = Palette.Builder(bitmap).generate();
-                collapsingToolbarLayout.setExpandedTitleColor(palette.lightMutedSwatch?.bodyTextColor ?: 0);
+                collapsingToolbarLayout.setExpandedTitleColor(palette.darkMutedSwatch?.titleTextColor ?: 0);
             }
 
             override fun onError() {

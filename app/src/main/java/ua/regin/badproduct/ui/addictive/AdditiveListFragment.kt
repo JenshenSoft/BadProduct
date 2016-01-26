@@ -38,7 +38,7 @@ class AdditiveListFragment : BaseFragment(), ValueEventListener {
 
     override fun afterViews() {
         adapter = AdditiveAdapter(context, {
-            startActivity(AdditiveDetailsActivity.newInstance(context, adapter.additiveList as ArrayList<Additive>, it))
+            startActivity(AdditiveDetailsActivity.newInstance(context, adapter.filteredList as ArrayList<Additive>, it))
         });
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);

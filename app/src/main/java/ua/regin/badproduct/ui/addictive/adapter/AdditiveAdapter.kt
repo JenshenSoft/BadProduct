@@ -1,12 +1,13 @@
 package ua.regin.badproduct.ui.addictive.adapter
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import ua.regin.badproduct.R
 import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.addictive.view.SquareLayout
@@ -21,7 +22,8 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
             filteredList = additiveList;
         }
 
-    private var filteredList: List<Additive>? = null;
+    var filteredList: List<Additive>? = null;
+        private set
 
     fun search(query: String) {
         filteredList = additiveList?.filter { it.synonym.contains(query, true) || it.name.contains(query, true) };
@@ -43,12 +45,13 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
 
         val nameView: TextView by bindView(R.id.nameView);
         val container: SquareLayout by bindView(R.id.container);
+        val imageView: ImageView by bindView(R.id.imageView);
 
         fun bindAdditive(additive: Additive, function: () -> Unit) {
             itemView.setOnClickListener { function() }
             with(additive) {
                 nameView.text = name;
-                container.setCardBackgroundColor(ContextCompat.getColor(context, if (danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed));
+                Picasso.with(context).load(image).fit().centerCrop().into(imageView);
             }
         }
     }
