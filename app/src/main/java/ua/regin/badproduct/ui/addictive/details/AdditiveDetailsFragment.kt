@@ -1,20 +1,13 @@
 package ua.regin.badproduct.ui.addictive.details
 
-import android.graphics.drawable.BitmapDrawable
-import android.os.Build
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v4.content.ContextCompat
-import android.support.v7.graphics.Palette
-import android.support.v7.widget.Toolbar
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.vmironov.jetpack.arguments.bindArgument
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ua.regin.badproduct.R
 import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.BaseFragment
-import ua.regin.badproduct.util.fragment.setToolbar
 import ua.regin.badproduct.util.knife.bindView
 
 class AdditiveDetailsFragment : BaseFragment() {
@@ -23,36 +16,16 @@ class AdditiveDetailsFragment : BaseFragment() {
 
     private val dangerousView: TextView by bindView(R.id.dangerousView);
     private val naturalityView: TextView by bindView(R.id.naturalityView);
-    private val toolbar: Toolbar by bindView(R.id.toolbar);
-    private val collapsingToolbarLayout: CollapsingToolbarLayout by bindView(R.id.collapsingToolbarLayout);
     private val imageView: ImageView by bindView(R.id.imageView);
+    private val webView: WebView by bindView(R.id.webView);
 
     var additive by bindArgument<Additive>();
 
     override fun afterViews() {
         dangerousView.text = context.getString(R.string.details_danger, additive.danger);
         naturalityView.text = additive.naturality.toString();
-        setToolbar(toolbar);
-        toolbar.setNavigationOnClickListener { activity.finish(); }
-        toolbar.title = additive.name;
-        Picasso.with(context).load(additive.image).fit().centerCrop().into(imageView, object : Callback {
-            override fun onSuccess() {
-                val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-                val palette = Palette.Builder(bitmap).generate();
-                collapsingToolbarLayout.setExpandedTitleColor(palette.darkMutedSwatch?.titleTextColor ?: 0);
-            }
-
-            override fun onError() {
-            }
-        });
-        changeHeaderColor();
-    }
-
-    private fun changeHeaderColor() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            activity.window.statusBarColor = ContextCompat.getColor(context, if (additive.danger < 2) R.color.colorPrimaryDarkGreen else R.color.colorPrimaryDarkRed);
-        }
-        collapsingToolbarLayout.setContentScrimResource(if (additive.danger < 2) R.color.colorPrimaryGreen else R.color.colorPrimaryRed)
+        Picasso.with(context).load(additive.image).fit().centerCrop().into(imageView);
+        webView.loadDataWithBaseURL(null, additive.description, "text/html", "UTF-8", null);
     }
 
     public companion object {
