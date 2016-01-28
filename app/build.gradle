@@ -43,7 +43,6 @@ android {
     sourceSets {
         main {
             java.srcDirs += 'src/main/kotlin'
-            res.srcDirs = show('src/main/res/layouts');
         }
     }
 
@@ -107,20 +106,4 @@ dependencies {
 
     //Palette
     compile 'com.android.support:palette-v7:23.1.1'
-}
-
-def show(String... resPath) {
-    String APP_FOLDER = "app/";
-    def folderList = []
-    resPath.each { item ->
-        new File(APP_FOLDER + item).eachDir { dir ->
-            folderList << dir.getPath().replace(APP_FOLDER, "");
-        }
-        folderList.add(item);
-    }
-
-    folderList.add('src/main/res');
-    println("Using as resourse folders: ")
-    folderList.each { it -> println(it) }
-    return folderList;
 }
