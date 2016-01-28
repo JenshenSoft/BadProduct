@@ -9,6 +9,7 @@
     <style name="AppTheme.AdditiveDetailsActivity">
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:colorBackground">@android:color/white</item>
+        <item name="android:radioButtonStyle">@style/Toolbar</item>
     </style>
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Light">

@@ -11,6 +11,7 @@ import ua.regin.badproduct.R
 import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.ui.addictive.details.adapter.AdditivePagerAdapter
+import ua.regin.badproduct.ui.view.BetterViewPager
 import ua.regin.badproduct.util.AnimationUtils
 import ua.regin.badproduct.util.getBackgroundColor
 import ua.regin.badproduct.util.knife.bindView
@@ -20,7 +21,7 @@ class AdditiveDetailsActivity : BaseActivity() {
 
     override fun getResId() = R.layout.activity_additive_details;
 
-    private val viewPager: ViewPager by bindView(R.id.viewPager);
+    private val viewPager: BetterViewPager by bindView(R.id.viewPager);
     private val toolbar: Toolbar by bindView(R.id.toolbar);
 
     lateinit private var additiveList: List<Additive>;
@@ -40,23 +41,23 @@ class AdditiveDetailsActivity : BaseActivity() {
         viewPager.setPageTransformer(false, ParallaxPagerTransformer(R.id.imageView));
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageSelected(position: Int) {
-                var additive = additiveList[position];
-                toolbar.title = additive.name;
-                toolbar.subtitle = additive.similar;
-                setHeaderColor(additive);
+                setAdditive(additiveList[position]);
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
             }
 
         })
         viewPager.currentItem = position;
-        setHeaderColor(additiveList[position]);
+    }
+
+    private fun setAdditive(additive: Additive) {
+        supportActionBar.title = additive.name;
+        supportActionBar.subtitle = additive.similar;
+        setHeaderColor(additive);
     }
 
     private fun setHeaderColor(additive: Additive) {

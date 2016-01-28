@@ -16,4 +16,6 @@
 
     <color name="normal_state">#2C3940</color>
 
+    <color name="color_black_opacity">#33000000</color>
+
 </resources>

@@ -18,8 +18,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.2"
-        android:background="@android:color/black" />
+        android:background="@color/color_black_opacity" />
 
     <TextView
         android:id="@+id/nameView"

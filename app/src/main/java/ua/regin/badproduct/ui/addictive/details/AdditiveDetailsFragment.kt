@@ -19,7 +19,7 @@ class AdditiveDetailsFragment : BaseFragment() {
     private val imageView: ImageView by bindView(R.id.imageView);
     private val webView: WebView by bindView(R.id.webView);
 
-    var additive by bindArgument<Additive>();
+    private var additive by bindArgument<Additive>();
 
     override fun afterViews() {
         dangerousView.text = context.getString(R.string.details_danger, additive.danger);
