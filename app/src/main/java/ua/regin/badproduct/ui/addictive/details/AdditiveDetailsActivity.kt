@@ -35,7 +35,6 @@ class AdditiveDetailsActivity : BaseActivity() {
     override fun afterViews() {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener { finish(); }
-        supportActionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24px);
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         viewPager.adapter = AdditivePagerAdapter(supportFragmentManager, additiveList);
         viewPager.setPageTransformer(false, ParallaxPagerTransformer(R.id.imageView));
