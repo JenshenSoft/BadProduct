@@ -1,7 +1,6 @@
 package ua.regin.badproduct.application;
 
 import com.firebase.client.Firebase;
-import com.squareup.leakcanary.LeakCanary;
 
 import ua.regin.badproduct.inject.component.AppComponent;
 import ua.regin.badproduct.inject.component.DaggerAppComponent;
@@ -24,7 +23,7 @@ public class Application extends android.app.Application {
         application = this;
         Firebase.setAndroidContext(this);
         Firebase.getDefaultConfig().setPersistenceEnabled(true);
-        LeakCanary.install(this);
+        //LeakCanary.install(this);
     }
 
     public static Application getApplication() {
