@@ -14,9 +14,9 @@ class AdditiveDetailsFragment : BaseFragment() {
     override fun getResId() = R.layout.fragment_details_additive;
     override fun getOptionsId() = R.menu.menu_search;
 
+    private val imageView: ImageView by bindView(R.id.imageView);
     private val dangerousView: TextView by bindView(R.id.dangerousView);
     private val naturalityView: TextView by bindView(R.id.naturalityView);
-    private val imageView: ImageView by bindView(R.id.imageView);
     private val webView: WebView by bindView(R.id.webView);
 
     private var additive by bindArgument<Additive>();
