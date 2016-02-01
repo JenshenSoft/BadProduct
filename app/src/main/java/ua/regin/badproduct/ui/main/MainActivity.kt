@@ -12,11 +12,11 @@ import ua.regin.badproduct.R
 import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.ui.main.adapter.PagerAdapter
 import ua.regin.badproduct.util.AnimationUtils
-import ua.regin.badproduct.util.getBackgroundColor
+import ua.regin.badproduct.util.toolbar.getBackgroundColor
 import ua.regin.badproduct.util.knife.bindView
 import ua.regin.badproduct.util.tab.selected
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     override fun getResId() = R.layout.activity_main;
 
     private val tabLayout: TabLayout by bindView(R.id.tabLayout);
@@ -42,33 +42,7 @@ class MainActivity : BaseActivity() {
 
         viewPager.adapter = pagerAdapter;
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                viewPager.currentItem = tab.position;
-                when (tab.position) {
-                    0 -> {
-                        setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
-                        setTitle(R.string.main_title_all);
-                    }
-                    1 -> {
-                        setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
-                        setTitle(R.string.main_title_notdanger);
-                    }
-                    2 -> {
-                        setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
-                        setTitle(R.string.main_title_danger);
-                    };
-                }
-                tab.selected(getContext(), true);
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.selected(getContext(), false)
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
-        })
+        tabLayout.setOnTabSelectedListener(this)
     }
 
     private fun setHeaderColor(@ColorRes statusBarColorRes: Int, @ColorRes toolbarBarColorRes: Int) {
@@ -77,5 +51,31 @@ class MainActivity : BaseActivity() {
         }
         AnimationUtils.animateColorChange(toolbar, "backgroundColor", toolbar.getBackgroundColor(), ContextCompat.getColor(getContext(), toolbarBarColorRes));
         AnimationUtils.animateColorChange(tabLayout, "backgroundColor", toolbar.getBackgroundColor(), ContextCompat.getColor(getContext(), toolbarBarColorRes));
+    }
+
+    public override fun onTabSelected(tab: TabLayout.Tab) {
+        viewPager.currentItem = tab.position;
+        when (tab.position) {
+            0 -> {
+                setHeaderColor(R.color.colorPrimaryDark, R.color.colorPrimary);
+                setTitle(R.string.main_title_all);
+            }
+            1 -> {
+                setHeaderColor(R.color.colorPrimaryDarkGreen, R.color.colorPrimaryGreen);
+                setTitle(R.string.main_title_notdanger);
+            }
+            2 -> {
+                setHeaderColor(R.color.colorPrimaryDarkRed, R.color.colorPrimaryRed);
+                setTitle(R.string.main_title_danger);
+            };
+        }
+        tab.selected(getContext(), true);
+    }
+
+    override fun onTabUnselected(tab: TabLayout.Tab) {
+        tab.selected(getContext(), false)
+    }
+
+    override fun onTabReselected(tab: TabLayout.Tab) {
     }
 }

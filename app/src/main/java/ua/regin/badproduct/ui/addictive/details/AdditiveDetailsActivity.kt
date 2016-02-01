@@ -13,7 +13,7 @@ import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.ui.addictive.details.adapter.AdditivePagerAdapter
 import ua.regin.badproduct.ui.view.BetterViewPager
 import ua.regin.badproduct.util.AnimationUtils
-import ua.regin.badproduct.util.getBackgroundColor
+import ua.regin.badproduct.util.toolbar.getBackgroundColor
 import ua.regin.badproduct.util.knife.bindView
 import java.util.*
 
