@@ -26,7 +26,11 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
         private set
 
     fun search(query: String) {
-        filteredList = additiveList?.filter { it.synonym.contains(query, true) || it.name.contains(query, true) };
+        filteredList = additiveList?.filter {
+            it.synonym.contains(query, true)
+                    || it.name.contains(query, true)
+                    || it.similar.contains(query, false)
+        };
         notifyDataSetChanged();
     }
 
@@ -44,6 +48,7 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val nameView: TextView by bindView(R.id.nameView);
+        val similarView: TextView by bindView(R.id.similarView);
         val container: SquareLayout by bindView(R.id.container);
         val imageView: ImageView by bindView(R.id.imageView);
 
@@ -51,6 +56,7 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
             itemView.setOnClickListener { function() }
             with(additive) {
                 nameView.text = name;
+                similarView.text = similar;
                 Picasso.with(context).load(image).fit().centerCrop().into(imageView);
             }
         }

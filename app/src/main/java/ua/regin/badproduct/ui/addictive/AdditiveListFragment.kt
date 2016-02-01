@@ -2,7 +2,6 @@ package ua.regin.badproduct.ui.addictive;
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.text.InputType
 import android.view.Menu
 import android.view.MenuInflater
 import com.firebase.client.DataSnapshot
@@ -48,7 +47,6 @@ class AdditiveListFragment : BaseFragment(), ValueEventListener {
         super.onCreateOptionsMenu(menu, inflater)
         var myActionMenuItem = menu?.findItem(R.id.action_search);
         var searchView = myActionMenuItem?.actionView as SearchView;
-        searchView.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_CLASS_TEXT;
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false;
