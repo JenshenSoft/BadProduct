@@ -13,7 +13,9 @@ import ua.regin.badproduct.model.Additive
 import ua.regin.badproduct.ui.addictive.view.SquareLayout
 import ua.regin.badproduct.util.knife.bindView
 
-class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
+class AdditiveAdapter(val context: Context,
+                      val onClick: (position: Int) -> Unit,
+                      val onLongPress: (position: Int) -> Unit) : RecyclerView.Adapter<AdditiveAdapter.ViewHolder>() {
 
     var additiveList: List<Additive>? = null;
         set(value) {
@@ -42,18 +44,21 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
     override fun getItemCount() = filteredList?.size ?: 0;
 
     override fun onBindViewHolder(holder: AdditiveAdapter.ViewHolder?, position: Int) {
-        holder?.bindAdditive(filteredList!![position], { onClick(position) });
+        holder?.bindAdditive(filteredList!![position], { onClick(position) }, { onLongPress(position) });
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val nameView: TextView by bindView(R.id.nameView);
         val similarView: TextView by bindView(R.id.similarView);
         val container: SquareLayout by bindView(R.id.container);
         val imageView: ImageView by bindView(R.id.imageView);
 
-        fun bindAdditive(additive: Additive, function: () -> Unit) {
-            itemView.setOnClickListener { function() }
+        fun bindAdditive(additive: Additive, onClick: () -> Unit, onLongClick: () -> Unit) {
+            container.setOnClickListener { onClick() }
+            container.setOnLongClickListener({
+                onLongClick();
+                true;
+            })
             with(additive) {
                 nameView.text = name;
                 similarView.text = similar;
@@ -62,3 +67,4 @@ class AdditiveAdapter(val context: Context, val onClick: (position: Int) -> Unit
         }
     }
 }
+

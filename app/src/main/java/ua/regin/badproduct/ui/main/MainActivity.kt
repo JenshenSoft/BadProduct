@@ -12,9 +12,9 @@ import ua.regin.badproduct.R
 import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.ui.main.adapter.PagerAdapter
 import ua.regin.badproduct.util.AnimationUtils
-import ua.regin.badproduct.util.toolbar.getBackgroundColor
 import ua.regin.badproduct.util.knife.bindView
 import ua.regin.badproduct.util.tab.selected
+import ua.regin.badproduct.util.toolbar.getBackgroundColor
 
 class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     override fun getResId() = R.layout.activity_main;

@@ -16,6 +16,7 @@ import ua.regin.badproduct.model.Danger
 import ua.regin.badproduct.ui.BaseFragment
 import ua.regin.badproduct.ui.addictive.adapter.AdditiveAdapter
 import ua.regin.badproduct.ui.addictive.details.AdditiveDetailsActivity
+import ua.regin.badproduct.ui.addictive.force.ForceFragmentDialog
 import ua.regin.badproduct.util.knife.bindView
 import java.util.*
 import javax.inject.Inject
@@ -38,6 +39,9 @@ class AdditiveListFragment : BaseFragment(), ValueEventListener {
     override fun afterViews() {
         adapter = AdditiveAdapter(context, {
             startActivity(AdditiveDetailsActivity.newInstance(context, adapter.filteredList as ArrayList<Additive>, it))
+        }, {
+            val forceDialog = ForceFragmentDialog();
+            forceDialog.show(childFragmentManager, null);
         });
         recyclerView.adapter = adapter;
         additiveManager.addAdditiveListener(this);
