@@ -1,11 +1,9 @@
 package ua.regin.badproduct.ui.addictive;
 
-import android.app.SearchManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuInflater
-import android.widget.Toast
 import com.firebase.client.DataSnapshot
 import com.firebase.client.FirebaseError
 import com.firebase.client.ValueEventListener

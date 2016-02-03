@@ -24,7 +24,8 @@ class SearchFragment : BaseFragment(), ValueEventListener {
     override fun getResId() = R.layout.fragment_search;
     override fun getOptionsId() = R.menu.menu_search;
 
-    private val recyclerView: RecyclerView by bindView(R.id.recyclerView)
+    private val recyclerView: RecyclerView by bindView(R.id.recyclerView);
+    lateinit private var searchView: SearchView;
 
     var search by bindArgument<String>();
 
@@ -48,9 +49,10 @@ class SearchFragment : BaseFragment(), ValueEventListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        var myActionMenuItem = menu?.findItem(R.id.action_search);
-        var searchView = myActionMenuItem?.actionView as SearchView;
-        searchView.setQuery(search, false);
+        var searchMenuItem = menu?.findItem(R.id.action_search);
+        searchMenuItem?.expandActionView();
+        searchView = searchMenuItem?.actionView as SearchView;
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false;
@@ -70,6 +72,7 @@ class SearchFragment : BaseFragment(), ValueEventListener {
             additiveList.add(additive);
         }
         adapter.additiveList = additiveList;
+        searchView.setQuery(search, false);
     }
 
     override public fun onCancelled(firebaseError: FirebaseError) {
