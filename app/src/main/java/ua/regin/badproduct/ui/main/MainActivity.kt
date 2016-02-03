@@ -1,5 +1,6 @@
 package ua.regin.badproduct.ui.main;
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.ColorRes
@@ -11,6 +12,7 @@ import android.view.Menu
 import ua.regin.badproduct.R
 import ua.regin.badproduct.ui.BaseActivity
 import ua.regin.badproduct.ui.main.adapter.PagerAdapter
+import ua.regin.badproduct.ui.settings.SettingsActivity
 import ua.regin.badproduct.util.AnimationUtils
 import ua.regin.badproduct.util.knife.bindView
 import ua.regin.badproduct.util.tab.selected
@@ -28,8 +30,13 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         setSupportActionBar(toolbar);
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_settings).setOnMenuItemClickListener {
+            startActivity(Intent(getContext(), SettingsActivity::class.java))
+            true;
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 

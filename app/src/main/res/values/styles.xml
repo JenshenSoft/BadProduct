@@ -22,4 +22,8 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="AppTheme.SettingsTheme">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
+    </style>
+
 </resources>

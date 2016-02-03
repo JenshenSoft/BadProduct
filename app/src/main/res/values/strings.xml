@@ -1,12 +1,22 @@
 <resources>
     <string name="app_name">Пищевые добавки</string>
 
-    <string name="menu.item.settings.title">Настройки</string>
+    <!-- Main Activity -->
     <string name="menu.item.search.title">Поиск</string>
-
     <string name="main.title.all">Все добавки</string>
     <string name="main.title.notdanger">Безопасные</string>
     <string name="main.title.danger">Опасные</string>
 
+    <!-- Details Activity-->
     <string name="details.danger">Опасность: %s/5</string>
+
+    <!-- Settings -->
+    <string name="menu.item.settings.title">Настройки</string>
+
+    <string name="settings.category.commons">Общие</string>
+
+    <string name="settings.input.key" translatable="false">root:</string>
+    <string name="settings.input.summary">Разрешить буквы в поиске?</string>
+    <string name="settings.input.title">Ввод букв</string>
+
 </resources>

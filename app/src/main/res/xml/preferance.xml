@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings.category.commons">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/settings.input.key"
+            android:summary="@string/settings.input.summary"
+            android:title="@string/settings.input.title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

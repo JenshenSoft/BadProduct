@@ -21,6 +21,11 @@
         <activity
             android:name=".ui.addictive.details.AdditiveDetailsActivity"
             android:theme="@style/AppTheme.AdditiveDetailsActivity" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/menu.item.settings.title"
+            android:theme="@style/AppTheme.SettingsTheme" />
     </application>
 
 </manifest>
