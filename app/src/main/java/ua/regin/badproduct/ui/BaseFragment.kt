@@ -6,9 +6,15 @@ import com.trello.rxlifecycle.components.support.RxFragment
 
 abstract class BaseFragment : RxFragment() {
 
+    private val HAS_NO_MENU: Int = -1;
+
+    private var optionsId: Int = HAS_NO_MENU
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        optionsId = getOptionsId();
+        setHasOptionsMenu(optionsId != HAS_NO_MENU)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,16 +28,14 @@ abstract class BaseFragment : RxFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(getOptionsId(), menu);
+        if (optionsId != HAS_NO_MENU) {
+            inflater?.inflate(optionsId, menu);
+        }
     }
 
     abstract fun getResId(): Int;
-    abstract fun getOptionsId(): Int;
-
-    open protected fun injectComponent() {
-    }
-
-    open protected fun afterViews() {
-    }
+    open protected fun getOptionsId() = HAS_NO_MENU;
+    open protected fun injectComponent() = Unit
+    open protected fun afterViews() = Unit
 }
 

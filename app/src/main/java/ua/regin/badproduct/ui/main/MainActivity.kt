@@ -26,7 +26,7 @@ class MainActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     private val toolbar: Toolbar by bindView(R.id.toolbar);
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
     }
 
