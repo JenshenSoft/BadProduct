@@ -1,2 +1,4 @@
-**Pattern: Dependency Injection
-**Technology: Firebase, Rx
+##Patterns: 
+Dependency Injection, Memento
+##Technology: 
+Firebase, Rx
